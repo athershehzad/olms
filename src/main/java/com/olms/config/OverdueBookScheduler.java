@@ -33,7 +33,5 @@ public class OverdueBookScheduler {
                 studentBooksRepository.save(booksEntity);
             }
         }
-
     }
-
 }
