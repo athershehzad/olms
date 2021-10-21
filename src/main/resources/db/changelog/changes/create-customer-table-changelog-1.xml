@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="admin" id="5">
+        <createTable tableName="rolls">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="roll_name" type="VARCHAR(15)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="status" type="boolean" defaultValue="true"/>
+            <column name="created_by" type="VARCHAR(80)"/>
+            <column name="updated_by" type="VARCHAR(80)"/>
+        </createTable>
+        <insert tableName="rolls">
+            <column name="roll_name" value="Admin"/>
+        </insert>
+        <insert tableName="rolls">
+            <column name="roll_name" value="Student"/>
+        </insert>
+        <insert tableName="rolls">
+            <column name="roll_name" value="Librarian"/>
+        </insert>
+        <insert tableName="rolls">
+            <column name="roll_name" value="Faculty Member"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet author="mc200201159" id="10">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="password" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="boolean" defaultValue="true"/>
+            <column name="user_type" type="VARCHAR(40)"/>
+            <column name="first_name" type="VARCHAR(80)"/>
+            <column name="last_name" type="VARCHAR(80)"/>
+            <column name="email" type="VARCHAR(60)"/>
+            <column name="created_on" type="datetime" defaultValue="now()">
+            </column>
+            <column name="updated_on" type="datetime"/>
+        </createTable>
+
+        <insert tableName="users">
+            <column name="password" value="$2a$10$2aDWmzdfzzIL0RX7W4BGbeqa/TdcyfHRnpev.QbGNUakiGy/bcmxG">
+
+            </column>
+
+            <column name="user_type" value="ADMIN"/>
+            <column name="first_name" value="super"/>
+            <column name="last_name" value="admin"/>
+            <column name="email" value="super-admin@gmail.com"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="virtual university" id="11">
+        <createTable tableName="books">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="author_of_the_book" type="VARCHAR(80)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="title_of_the_book" type="VARCHAR(80)"/>
+            <column name="published_place" type="VARCHAR(80)"/>
+            <column name="publication_Year" type="INT"/>
+            <column name="location_in_the_library" type="VARCHAR(80)"/>
+            <column name="number_of_copies" type="INT"/>
+            <column name="current_status" type="VARCHAR(80)"/>
+            <column name="status" type="boolean" defaultValue="true"/>
+            <column name="created_by" type="VARCHAR(80)"/>
+            <column name="updated_by" type="VARCHAR(80)">
+            </column>
+        </createTable>
+
+
+        <insert tableName="books">
+            <column name="author_of_the_book" value="virtual university"/>
+            <column name="title_of_the_book" value="my project"/>
+            <column name="published_place" value="Pakistan"/>
+            <column name="publication_Year" value="2020"/>
+            <column name="location_in_the_library" value="in second row"/>
+            <column name="number_of_copies" value="50"/>
+            <column name="current_status" value="available"/>
+        </insert>
+
+        <createTable tableName="student_books">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="author_of_the_book" type="VARCHAR(80)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="publication_Year" type="INT"/>
+            <column name="title_of_the_book" type="VARCHAR(80)"/>
+            <column name="location_in_the_library" type="VARCHAR(80)"/>
+            <column name="number_of_copies" type="INT"/>
+            <column name="student_name" type="VARCHAR(80)"/>
+            <column name="student_number" type="VARCHAR(80)"/>
+            <column name="status" type="VARCHAR(40)"/>
+            <column name="book_received" type="boolean"/>
+            <column name="book_id" type="int"/>
+            <column name="book_fine" type="double"/>
+            <column name="issue_on" type="date"/>
+            <column name="receive_on" type="date"/>
+            <column name="created_by" type="varchar(36)" defaultValue="system">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="admin" id="fine">
+        <createTable tableName="book_fine">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="fine_amount" type="double">
+                <constraints nullable="true"/>
+            </column>
+            <column name="status" type="boolean" defaultValue="true"/>
+            <column name="fine_created_on" type="date"/>
+            <column name="fine_updated_on" type="date">
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

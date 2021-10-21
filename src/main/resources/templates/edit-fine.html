@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+            name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Edit user</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body class="container">
+<div class="container text-center">
+    <div>
+        <h1>Edit fine</h1>
+    </div>
+    <form method="post" th:action="@{/logout}">
+        <div>
+            <input type="submit" value="Logout"></input>
+        </div>
+        <p>
+            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+        </p>
+
+
+    </form>
+</div>
+<form class="col card p-3 my-5" method="post" th:action="'/edit-fine/'+${fineEntity.id}" th:object="${fineEntity}">
+    <div class="form-group">
+        <label for="fineAmount">First Name</label>
+        <input class="form-control" id="fineAmount" placeholder="Enter First Name" required
+               th:field="*{fineAmount}"
+               type="text"/>
+    </div>
+    <input id="activeFlag" th:field="*{status}" type="hidden">
+    <div>
+        <input class="btn btn-success" onclick="document.getElementById('activeFlag').value='true'" type="submit"
+               value="Update">
+        <input class="btn btn-danger" onclick="document.getElementById('activeFlag').value='false'" type="submit"
+               value="Delete">
+    </div>
+</form>
+</body>
+</html>

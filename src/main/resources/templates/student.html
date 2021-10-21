@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+            name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Thymeleaf CRUD Example</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/users}">OLMS - Librarian operations</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarResponsive"
+                data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/open-search-book}">Search Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/issue-book}">Issue Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/receive-book}">Receive Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/add-fine}">Fine information</a>
+                </li>
+                <li class="nav-item">
+                    <form method="post" th:action="@{/logout}">
+                        <div>
+                            <input type="submit" value="Logout"></input>
+                        </div>
+                    </form>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<p th:align="center">
+    Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+</p>
+<body class="container">
+<form class="col card p-3 my-5" method="post" th:action="'/student-book'" th:object="${studentInfo}">
+    <div class="form-group">
+        <label for="studentNumber">Student / Faculty number</label>
+        <input autocomplete="off" class="form-control" id="studentNumber" placeholder="Enter Student / Faculty Number"
+               required
+               th:field="*{studentNumber}"
+               type="text"/>
+
+        <input class="form-control" id="bookId"
+               th:field="*{bookId}"
+               type="hidden"/>
+    </div>
+    <div class="form-group">
+        <label for="studentName">Student / Faculty Name</label>
+        <input autocomplete="off" class="form-control" id="studentName" placeholder="Enter Student / Faculty Name"
+               required
+               th:field="*{studentName}"
+               type="text"/>
+    </div>
+    <div class="form-group">
+        <label for="locationInTheLibrary">Location In The Library</label>
+        <input autocomplete="off" class="form-control" id="locationInTheLibrary" readonly
+               th:field="*{locationInTheLibrary}"
+               type="text"/>
+    </div>
+
+    <div class="form-group">
+        <label for="titleOfTheBook">Title Of The Book</label>
+        <input autocomplete="off" class="form-control" id="titleOfTheBook" readonly
+               th:field="*{titleOfTheBook}"
+               type="text"/>
+    </div>
+
+    <div>
+        <input autocomplete="off" class="form-control" id="booksRole"
+               th:field="*{booksRole}"
+               type="hidden"/>
+        <input class="btn btn-success" type="submit"
+               value="Update">
+
+    </div>
+</form>
+<div class="alert alert-success text-center" th:if="${userMessage}" th:utext="${userMessage}"></div>
+</body>
+</html>
